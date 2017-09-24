@@ -1,16 +1,24 @@
 package TextUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class SongList
 {
 	static ArrayList<Song> songList = new ArrayList<>();
+	Comparator<Song> songComparer = Comparator.comparing(Song::getName, String.CASE_INSENSITIVE_ORDER)
+	          .thenComparing(Song::getArtist, String.CASE_INSENSITIVE_ORDER);
 	
 	public void addSong(String newName, String newArtist, String newAlbum, int newYear)
 	{
 		Song newSong = new Song(newName, newArtist, newAlbum, newYear);
 		if(!isDuplicate(newSong))
+		{
 			songList.add(newSong);
+			Collections.sort(songList, songComparer);
+		}
 		//else
 			//tell user cannot be done
 	}
