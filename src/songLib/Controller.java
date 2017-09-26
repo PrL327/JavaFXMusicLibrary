@@ -11,7 +11,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView; 
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField; 
 
 public class Controller 
 {
@@ -28,6 +29,12 @@ public class Controller
 	Button addSong;
 	
 	@FXML
+	Button saveButton;
+	
+	@FXML
+	Button cancelButton;
+	
+	@FXML
 	Label songNameLabel;
 	
 	@FXML
@@ -42,7 +49,25 @@ public class Controller
 	@FXML
 	private ObservableList<Song> observableList;
 	
+	@FXML
+	TextField songInput;
+	
+	@FXML
+	TextField artistInput;
+	
+	@FXML
+	TextField albumInput;
+	
+	@FXML
+	TextField yearInput;
 	public void start(Stage mainStage) {
+		songInput.setVisible(false);
+		artistInput.setVisible(false);
+		albumInput.setVisible(false);
+		yearInput.setVisible(false);
+		saveButton.setVisible(false);
+		cancelButton.setVisible(false);
+		
 		SongList.loadList();
 		//SongList.printList();
 		
@@ -87,6 +112,48 @@ public class Controller
 	}
 	
 	public void addClick(ActionEvent e) {
+		
+		songInput.setVisible(true);
+		artistInput.setVisible(true);
+		albumInput.setVisible(true);
+		yearInput.setVisible(true);
+		saveButton.setVisible(true);
+		cancelButton.setVisible(true);
+		
+		songNameLabel.setVisible(false);
+		artistLabel.setVisible(false);
+		albumLabel.setVisible(false);
+		yearPublishedLabel.setVisible(false);
+		
+	}
+	
+	public void editClick(ActionEvent e) {
+		
+		songInput.setVisible(true);
+		artistInput.setVisible(true);
+		albumInput.setVisible(true);
+		yearInput.setVisible(true);
+		saveButton.setVisible(true);
+		
+		songNameLabel.setVisible(false);
+		artistLabel.setVisible(false);
+		albumLabel.setVisible(false);
+		yearPublishedLabel.setVisible(false);
+	}
+	
+	public void cancel(ActionEvent e) {
+		
+		songInput.setVisible(false);
+		artistInput.setVisible(false);
+		albumInput.setVisible(false);
+		yearInput.setVisible(false);
+		saveButton.setVisible(false);
+		cancelButton.setVisible(true);
+		
+		songNameLabel.setVisible(true);
+		artistLabel.setVisible(true);
+		albumLabel.setVisible(true);
+		yearPublishedLabel.setVisible(true);
 		
 	}
 	

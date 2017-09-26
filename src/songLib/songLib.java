@@ -26,7 +26,7 @@ public class songLib extends Application
 		
 		Scene scene = new Scene(root);
 		Primestage.setScene(scene);
-		Primestage.setTitle("FXML Welcome");
+		Primestage.setTitle("Song Library");
 		Primestage.setResizable(false);
 		Primestage.show();
 	}
