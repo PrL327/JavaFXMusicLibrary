@@ -22,6 +22,7 @@ public class songLib extends Application
         
         stage.setTitle("FXML Welcome");
         stage.setScene(new Scene(root, 300, 275));
+        stage.setResizable(false);
         stage.show();
 	}
 }
