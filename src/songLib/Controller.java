@@ -7,6 +7,6 @@ public class Controller
 {
 	Stage mainStage;
 	
-	@FXML
+	//@FXML
 	
 }

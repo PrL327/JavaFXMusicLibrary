@@ -18,7 +18,7 @@ public class songLib extends Application
 	{
 		// Create the Lists for the ListViews
         //ObservableList<String> seasonList = FXCollections.<String>observableArrayList(SongList.getShrtList());
-		Parent root = FXMLLoader.load(getClass().getResource("fxml_example.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("SongLibraryFX.fxml"));
         
         stage.setTitle("FXML Welcome");
         stage.setScene(new Scene(root, 300, 275));
