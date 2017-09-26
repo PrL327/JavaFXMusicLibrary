@@ -10,7 +10,7 @@ public class SongList
 	static ArrayList<Song> songList = new ArrayList<>();
 	Comparator<Song> songComparer = Comparator.comparing(Song::getName, String.CASE_INSENSITIVE_ORDER)
 	          .thenComparing(Song::getArtist, String.CASE_INSENSITIVE_ORDER);
-	
+	private static ArrayList<String> shrtList;
 	public void addSong(String newName, String newArtist, String newAlbum, int newYear)
 	{
 		Song newSong = new Song(newName, newArtist, newAlbum, newYear);
@@ -58,4 +58,13 @@ public class SongList
 			System.out.print(s);
 	}
 	
+	public static ArrayList<String> getShrtList()
+	{
+		shrtList = new ArrayList<>();
+		for(Song s: songList)
+		{
+			shrtList.add(s.getName() + " " + s.getArtist());
+		}
+		return shrtList;
+	}
 }
