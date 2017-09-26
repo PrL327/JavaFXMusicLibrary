@@ -7,12 +7,10 @@ import java.util.Comparator;
 public class SongList
 {
 	//main list of songs
-	static ArrayList<Song> songList = new ArrayList<>();
+	public static ArrayList<Song> songList = new ArrayList<>();
 	//Comparator
 	Comparator<Song> songComparer = Comparator.comparing(Song::getName, String.CASE_INSENSITIVE_ORDER)
 	          .thenComparing(Song::getArtist, String.CASE_INSENSITIVE_ORDER);
-	//list designed for list view
-	private static ArrayList<String> shrtList;
 	
 	public void addSong(String newName, String newArtist, String newAlbum, int newYear)
 	{
@@ -61,13 +59,8 @@ public class SongList
 			System.out.print(s);
 	}
 	
-	public static ArrayList<String> getShrtList()
+	public static ArrayList<Song> getList()
 	{
-		shrtList = new ArrayList<>();
-		for(Song s: songList)
-		{
-			shrtList.add(s.getName() + " " + s.getArtist());
-		}
-		return shrtList;
+		return songList;
 	}
 }

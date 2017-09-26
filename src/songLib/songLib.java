@@ -2,28 +2,33 @@ package songLib;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import songLib.Controller;
 
 public class songLib extends Application
 {
 	public static void main(String[] args) 
 	{
-		Application.launch(args);
+		launch(args);
 	}
 
 	@Override
-	public void start(Stage stage) throws Exception 
+	public void start(Stage Primestage) throws Exception 
 	{
-		// Create the Lists for the ListViews
-        //ObservableList<String> seasonList = FXCollections.<String>observableArrayList(SongList.getShrtList());
-		Parent root = FXMLLoader.load(getClass().getResource("SongLibraryFX.fxml"));
-        
-        stage.setTitle("FXML Welcome");
-        stage.setScene(new Scene(root, 300, 275));
-        stage.setResizable(false);
-        stage.show();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/songLib/SongLibraryFX.fxml"));
+		AnchorPane root = (AnchorPane) loader.load();
+		
+		Controller controller = loader.getController();
+		controller.start(Primestage);
+		
+		Scene scene = new Scene(root);
+		Primestage.setScene(scene);
+		Primestage.setTitle("FXML Welcome");
+		Primestage.setResizable(false);
+		Primestage.show();
 	}
 }
 

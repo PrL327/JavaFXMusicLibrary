@@ -2,6 +2,7 @@ package songLib;
 
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
+import songUtil.Song;
 import songUtil.SongList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,10 +13,8 @@ import javafx.scene.control.ListView;
 
 public class Controller 
 {
-	Stage mainStage;
-	
 	@FXML
-	ListView<String> songList;
+	ListView<String> songView;
 	
 	@FXML
 	Button editSong;
@@ -38,12 +37,72 @@ public class Controller
 	@FXML
 	Label yearPublishedLabel;
 	
-	private ObservableList<String> observableList;
+	@FXML
+	private ObservableList<Song> observableList;
+	private ObservableList<String> obsList;    
 	
-	public void onLaunch(Stage mainStage) {
-		observableList = FXCollections.<String>observableArrayList(SongList.getShrtList());
-		songList.setItems(observableList);
-		songList.getSelectionModel().select(0);
+	public void start(Stage mainStage) {
+		//sngList = new ListView<>();
+		//SongList.loadList();
+		//SongList.printList();
+		
+		//observableList = FXCollections.observableArrayList(SongList.getList());
+		obsList = FXCollections.observableArrayList(                               
+                "Giants",                               
+                "Patriots",
+                "49ers",
+                "Rams",
+                "Packers",
+                "Colts",
+                "Cowboys",
+                "Broncos",
+                "Vikings",
+                "Dolphins",
+                "Titans",
+                "Seahawks",
+                "Steelers",
+                "Jaguars");
+		
+		songView.setItems(obsList); 
+		//System.out.println(observableList.size());
+		//sngList = new ListView<>();
+		
+		//sngList.setItems(observableList);
+		
+//		sngList.setCellFactory(param -> new ListCell<Song>() {
+//            @Override
+//            protected void updateItem(Song item, boolean empty) {
+//                super.updateItem(item, empty);
+//
+//                if (empty || item == null) {
+//                    setText(null);
+//                } else {
+//                    setText(item.getName() + "-" + item.getArtist());
+//                }
+//            }
+//        });
+		
+//		sngList.setCellFactory(new Callback<ListView<Song>, ListCell<Song>>(){
+//			 
+//            @Override
+//            public ListCell<Song> call(ListView<Song> p) {
+//                 
+//                ListCell<Song> cell = new ListCell<Song>(){
+// 
+//                    @Override
+//                    protected void updateItem(Song t, boolean bln) {
+//                        super.updateItem(t, bln);
+//                        if (t != null) {
+//                            setText(t.getName() + ":" + t.getArtist());
+//                        }
+//                    }
+// 
+//                };
+//                 
+//                return cell;
+//            }
+//        });
+		songView.getSelectionModel().select(0);
 	}
 	
 	public void addClick(ActionEvent e) {
