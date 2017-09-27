@@ -61,7 +61,7 @@
                         <TextField fx:id="yearInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="223.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
-                  <Button fx:id="saveButton" layoutX="262.0" layoutY="217.0" mnemonicParsing="false" text="Save" />
+                  <Button fx:id="saveButton" layoutX="262.0" layoutY="217.0" mnemonicParsing="false" onAction="#save" text="Save" />
                   <Button fx:id="cancelButton" layoutX="185.0" layoutY="217.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
                </children></AnchorPane>
         </items>

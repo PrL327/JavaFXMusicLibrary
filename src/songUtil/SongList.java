@@ -12,7 +12,7 @@ public class SongList
 	Comparator<Song> songComparer = Comparator.comparing(Song::getName, String.CASE_INSENSITIVE_ORDER)
 	          .thenComparing(Song::getArtist, String.CASE_INSENSITIVE_ORDER);
 	
-	public void addSong(String newName, String newArtist, String newAlbum, int newYear)
+	public void addSong(String newName, String newArtist, String newAlbum, String newYear)
 	{
 		Song newSong = new Song(newName, newArtist, newAlbum, newYear);
 		if(!isDuplicate(newSong))

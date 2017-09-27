@@ -2,8 +2,7 @@ package songUtil;
 
 public class Song
 {
-	private String name, artist, album; 
-	private int year;
+	private String name, artist, album, year;
 	
 	//name, artist, album, and year
 	/**
@@ -12,7 +11,7 @@ public class Song
 	 * @param newAlbum
 	 * @param newYear
 	 */
-	public Song(String newName, String newArtist, String newAlbum, int newYear) 
+	public Song(String newName, String newArtist, String newAlbum, String newYear) 
 	{
 		name = newName;
 		year = newYear;
@@ -40,10 +39,10 @@ public class Song
 	public void setAlbum(String album) {
 		this.album = album;
 	}
-	public int getYear() {
+	public String getYear() {
 		return year;
 	}
-	public void setYear(int year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 	

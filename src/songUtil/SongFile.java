@@ -68,7 +68,7 @@ public class SongFile
 				//System.out.println(m.group(2));
 				//System.out.println(m.group(3));
 				//System.out.println(m.group(4));
-				songList.add(new Song(m.group(1),m.group(2),m.group(3),Integer.parseInt(m.group(4))));
+				songList.add(new Song(m.group(1),m.group(2),m.group(3),m.group(4)));
 			}
 			
 			//songList.add(new Song(m.group(1),,,)

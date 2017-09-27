@@ -1,10 +1,13 @@
 package songLib;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import songLib.Controller;
 
 public class songLib extends Application
@@ -29,6 +32,15 @@ public class songLib extends Application
 		Primestage.setTitle("Song Library");
 		Primestage.setResizable(false);
 		Primestage.show();
+		
+		Primestage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+		    @Override
+		    public void handle(WindowEvent t) {
+		    	//List<Consultation> showing = provider.getItems();
+		        Platform.exit();
+		        System.exit(0);
+		    }
+		});
 	}
 }
 
