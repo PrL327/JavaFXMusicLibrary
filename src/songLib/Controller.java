@@ -6,6 +6,7 @@ import javafx.util.Callback;
 import songUtil.Song;
 import songUtil.SongList;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Optional;
@@ -301,5 +302,10 @@ public class Controller
 			 observableList.remove(index);
 			 songView.getSelectionModel().select(selectIndex);
 		 }
+	}
+	
+	public void saveList()
+	{
+		SongList.setList(new ArrayList<>(observableList));
 	}
 }

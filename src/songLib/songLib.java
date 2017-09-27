@@ -37,6 +37,7 @@ public class songLib extends Application
 		    @Override
 		    public void handle(WindowEvent t) {
 		    	//List<Consultation> showing = provider.getItems();
+		    	controller.saveList();
 		        Platform.exit();
 		        System.exit(0);
 		    }
