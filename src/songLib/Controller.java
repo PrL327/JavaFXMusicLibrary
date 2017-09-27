@@ -169,6 +169,7 @@ public class Controller
 		albumInput.setVisible(true);
 		yearInput.setVisible(true);
 		saveButton.setVisible(true);
+		cancelButton.setVisible(true);
 
 		songNameLabel.setVisible(false);
 		artistLabel.setVisible(false);
@@ -183,7 +184,7 @@ public class Controller
 		albumInput.setVisible(false);
 		yearInput.setVisible(false);
 		saveButton.setVisible(false);
-		cancelButton.setVisible(true);
+		cancelButton.setVisible(false);
 
 		songNameLabel.setVisible(true);
 		artistLabel.setVisible(true);
