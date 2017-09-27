@@ -144,6 +144,18 @@ public class Controller
 		String artist = artistInput.getText();
 		String album = albumInput.getText();
 		String year = yearInput.getText();
+		
+		songInput.setVisible(false);
+		artistInput.setVisible(false);
+		albumInput.setVisible(false);
+		yearInput.setVisible(false);
+		saveButton.setVisible(false);
+		cancelButton.setVisible(false);
+		
+		songNameLabel.setVisible(true);
+		artistLabel.setVisible(true);
+		albumLabel.setVisible(true);
+		yearPublishedLabel.setVisible(true);
 	}
 
 	public void addClick(ActionEvent e) {
