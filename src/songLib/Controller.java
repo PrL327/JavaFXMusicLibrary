@@ -1,6 +1,7 @@
 package songLib;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import songUtil.Song;
@@ -22,6 +23,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import javafx.scene.control.Alert.AlertType; 
 
 public class Controller 
@@ -77,6 +82,10 @@ public class Controller
 	@FXML
 	TextField yearInput;
 	public void start(Stage mainStage) {
+		editSong.setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
+		addSong.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+		deleteSong.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+		
 		songInput.setVisible(false);
 		artistInput.setVisible(false);
 		albumInput.setVisible(false);
@@ -224,8 +233,9 @@ public class Controller
 		yearPublishedLabel.setVisible(true);
 	}
 
-	public void addClick(ActionEvent e) {
-
+	public void addClick(ActionEvent e)
+	{
+		
 		songInput.setVisible(true);
 		artistInput.setVisible(true);
 		albumInput.setVisible(true);
@@ -233,6 +243,11 @@ public class Controller
 		saveButton.setVisible(true);
 		cancelButton.setVisible(true);
 
+		songInput.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+		artistInput.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+		albumInput.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+		yearInput.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+		
 		songNameLabel.setVisible(false);
 		artistLabel.setVisible(false);
 		albumLabel.setVisible(false);
@@ -241,14 +256,20 @@ public class Controller
 		mode = 'c'; //tells save to add new song
 	}
 
-	public void editClick(ActionEvent e) {
-
+	public void editClick(ActionEvent e) 
+	{
+		
 		songInput.setVisible(true);
 		artistInput.setVisible(true);
 		albumInput.setVisible(true);
 		yearInput.setVisible(true);
 		saveButton.setVisible(true);
 		cancelButton.setVisible(true);
+		
+		songInput.setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
+		artistInput.setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
+		albumInput.setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
+		yearInput.setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
 
 		songNameLabel.setVisible(false);
 		artistLabel.setVisible(false);
