@@ -26,7 +26,7 @@
                   <ButtonBar layoutX="60.0" layoutY="333.0" prefHeight="40.0" prefWidth="200.0">
                     <buttons>
                         <Button fx:id="editSong" mnemonicParsing="false" onAction="#editClick" text="Edit.." />
-                        <Button fx:id="deleteSong" mnemonicParsing="false" text="Delete" />
+                        <Button fx:id="deleteSong" mnemonicParsing="false" onAction="#delete" text="Delete" />
                       <Button fx:id="addSong" mnemonicParsing="false" onAction="#addClick" text="Add.." />
                     </buttons>
                   </ButtonBar>

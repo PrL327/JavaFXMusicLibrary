@@ -51,12 +51,12 @@ public class Song
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if(obj == null || obj instanceof Song)
+		if(obj == null || !(obj instanceof Song))
 			return false;
 		else
 		{
 			Song newSong = (Song) obj;
-			if(this.getName().equalsIgnoreCase(newSong.getName()) && this.getArtist().equalsIgnoreCase(newSong.getArtist()))
+			if(getName().equalsIgnoreCase(newSong.getName()) && getArtist().equalsIgnoreCase(newSong.getArtist()))
 				return true;
 			return false;
 		}
