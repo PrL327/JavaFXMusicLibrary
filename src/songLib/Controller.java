@@ -89,14 +89,12 @@ public class Controller
 	Label helpLabel;
 	
 	public void start(Stage mainStage) {
-		System.out.printf("%-25s%s\n", "aaaaaaaaaaaaaaaaaa", "b");
-		System.out.printf("%-25s%s\n", "a", "b");
 		
 		editSong.setBackground(new Background(new BackgroundFill(editColor, CornerRadii.EMPTY, Insets.EMPTY)));
 		addSong.setBackground(new Background(new BackgroundFill(addColor, CornerRadii.EMPTY, Insets.EMPTY)));
 		deleteSong.setBackground(new Background(new BackgroundFill(deleteColor, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		helpLabel.setText(String.format("%-25s%s", "Song name", "Artist"));
+		helpLabel.setText(String.format("  %-25s%s", "Song name", "Artist"));
 		helpLabel.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		songInput.setVisible(false);
@@ -113,6 +111,7 @@ public class Controller
 
 		songView.setItems(observableList);
 		//songView.set
+		//songView.setf
 		songView.setCellFactory(param -> new ListCell<Song>() {
 			@Override
 			protected void updateItem(Song item, boolean empty) {
@@ -121,7 +120,7 @@ public class Controller
 				if (empty || item == null) {
 					setText(null);
 				} else {
-					setText(String.format("%-35s%s", item.getName(), item.getArtist()));
+					setText(String.format("%-15s%s", item.getName(), item.getArtist()));
 				}
 			}
 		});
@@ -237,17 +236,17 @@ public class Controller
 		//Collections.sort(observableList, songComparer);
 		//songView.getSelectionModel().select(observableList.indexOf(new Song(name, artist, album, year)));
 
-		songInput.setVisible(false);
-		artistInput.setVisible(false);
-		albumInput.setVisible(false);
-		yearInput.setVisible(false);
-		saveButton.setVisible(false);
-		cancelButton.setVisible(false);
-
-		songNameLabel.setVisible(true);
-		artistLabel.setVisible(true);
-		albumLabel.setVisible(true);
-		yearPublishedLabel.setVisible(true);
+//		songInput.setVisible(false);
+//		artistInput.setVisible(false);
+//		albumInput.setVisible(false);
+//		yearInput.setVisible(false);
+//		saveButton.setVisible(false);
+//		cancelButton.setVisible(false);
+//
+//		songNameLabel.setVisible(true);
+//		artistLabel.setVisible(true);
+//		albumLabel.setVisible(true);
+//		yearPublishedLabel.setVisible(true);
 	}
 
 	public void addClick(ActionEvent e)
