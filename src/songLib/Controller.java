@@ -81,10 +81,17 @@ public class Controller
 
 	@FXML
 	TextField yearInput;
+	
+	@FXML
+	Label helpLabel;
+	
 	public void start(Stage mainStage) {
 		editSong.setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
 		addSong.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
 		deleteSong.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+		
+		helpLabel.setText(String.format("%-25s%s", "Song name", "Artist"));
+		helpLabel.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		songInput.setVisible(false);
 		artistInput.setVisible(false);
@@ -108,7 +115,7 @@ public class Controller
 				if (empty || item == null) {
 					setText(null);
 				} else {
-					setText(item.getName() + "-" + item.getArtist());
+					setText(String.format("%-25s%s", item.getName(), item.getArtist()));
 				}
 			}
 		});
