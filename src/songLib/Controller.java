@@ -36,7 +36,10 @@ public class Controller
 	//n = nothing
 	//d = deletion mode
 	char mode = 'n';
-
+	Color deleteColor = Color.SALMON;
+	Color addColor = Color.LIGHTGREEN;
+	Color editColor = Color.LIGHTYELLOW;
+	
 	@FXML
 	ListView<Song> songView;
 
@@ -86,9 +89,9 @@ public class Controller
 	Label helpLabel;
 	
 	public void start(Stage mainStage) {
-		editSong.setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
-		addSong.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
-		deleteSong.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+		editSong.setBackground(new Background(new BackgroundFill(editColor, CornerRadii.EMPTY, Insets.EMPTY)));
+		addSong.setBackground(new Background(new BackgroundFill(addColor, CornerRadii.EMPTY, Insets.EMPTY)));
+		deleteSong.setBackground(new Background(new BackgroundFill(deleteColor, CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		helpLabel.setText(String.format("%-25s%s", "Song name", "Artist"));
 		helpLabel.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -250,10 +253,15 @@ public class Controller
 		saveButton.setVisible(true);
 		cancelButton.setVisible(true);
 
-		songInput.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
-		artistInput.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
-		albumInput.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
-		yearInput.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+		songInput.setText("");
+		artistInput.setText("");
+		albumInput.setText("");
+		yearInput.setText("");
+		
+		songInput.setBackground(new Background(new BackgroundFill(addColor, CornerRadii.EMPTY, Insets.EMPTY)));
+		artistInput.setBackground(new Background(new BackgroundFill(addColor, CornerRadii.EMPTY, Insets.EMPTY)));
+		albumInput.setBackground(new Background(new BackgroundFill(addColor, CornerRadii.EMPTY, Insets.EMPTY)));
+		yearInput.setBackground(new Background(new BackgroundFill(addColor, CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		songNameLabel.setVisible(false);
 		artistLabel.setVisible(false);
@@ -273,10 +281,10 @@ public class Controller
 		saveButton.setVisible(true);
 		cancelButton.setVisible(true);
 		
-		songInput.setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
-		artistInput.setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
-		albumInput.setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
-		yearInput.setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
+		songInput.setBackground(new Background(new BackgroundFill(editColor, CornerRadii.EMPTY, Insets.EMPTY)));
+		artistInput.setBackground(new Background(new BackgroundFill(editColor, CornerRadii.EMPTY, Insets.EMPTY)));
+		albumInput.setBackground(new Background(new BackgroundFill(editColor, CornerRadii.EMPTY, Insets.EMPTY)));
+		yearInput.setBackground(new Background(new BackgroundFill(editColor, CornerRadii.EMPTY, Insets.EMPTY)));
 
 		songNameLabel.setVisible(false);
 		artistLabel.setVisible(false);
