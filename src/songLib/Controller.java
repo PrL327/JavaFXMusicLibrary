@@ -89,6 +89,9 @@ public class Controller
 	Label helpLabel;
 	
 	public void start(Stage mainStage) {
+		System.out.printf("%-25s%s\n", "aaaaaaaaaaaaaaaaaa", "b");
+		System.out.printf("%-25s%s\n", "a", "b");
+		
 		editSong.setBackground(new Background(new BackgroundFill(editColor, CornerRadii.EMPTY, Insets.EMPTY)));
 		addSong.setBackground(new Background(new BackgroundFill(addColor, CornerRadii.EMPTY, Insets.EMPTY)));
 		deleteSong.setBackground(new Background(new BackgroundFill(deleteColor, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -109,7 +112,7 @@ public class Controller
 		observableList = FXCollections.observableArrayList(SongList.getList());
 
 		songView.setItems(observableList);
-
+		//songView.set
 		songView.setCellFactory(param -> new ListCell<Song>() {
 			@Override
 			protected void updateItem(Song item, boolean empty) {
@@ -118,7 +121,7 @@ public class Controller
 				if (empty || item == null) {
 					setText(null);
 				} else {
-					setText(String.format("%-25s%s", item.getName(), item.getArtist()));
+					setText(String.format("%-35s%s", item.getName(), item.getArtist()));
 				}
 			}
 		});
@@ -174,6 +177,8 @@ public class Controller
 	{
 		Song s;
 		boolean canAdd = true;
+		if(newSong.getArtist().isEmpty() || newSong.getName().isEmpty())
+			canAdd = false;
 		for(int i = 0; i < observableList.size() && canAdd; i++)
 		{
 			s = observableList.get(i);
@@ -185,6 +190,7 @@ public class Controller
 				}
 			}
 		}
+		
 		return canAdd;
 	}
 	
@@ -203,6 +209,7 @@ public class Controller
 				.thenComparing(Song::getArtist, String.CASE_INSENSITIVE_ORDER);
 
 		Song newSong = new Song(name, artist, album, year);
+		
 		if(mode == 'e')
 		{
 			if(canAdd(index, newSong))
