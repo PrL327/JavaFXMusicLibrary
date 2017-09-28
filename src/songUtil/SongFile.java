@@ -52,7 +52,7 @@ public class SongFile
 		String songInfo = "";
 		Pattern r;
 		Matcher m;
-		String pattern = "Name: (\\w*) Artist: (\\w+) Album: (\\w) Year: (\\d+)";
+		String pattern = "Name: (\\w+) Artist: (\\w+) Album: (\\w*) Year: (\\d*)";
 		for(int i = 0; i < list.size(); i += 5)
 		{
 			songInfo = list.get(i) + list.get(i+1) + list.get(i+2) + list.get(i+3);
