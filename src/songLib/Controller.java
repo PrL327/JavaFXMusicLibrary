@@ -314,6 +314,11 @@ public class Controller
 		albumLabel.setVisible(true);
 		yearPublishedLabel.setVisible(true);
 
+		//get item selected
+		Song item = songView.getSelectionModel().getSelectedItem();
+
+		//observableList.set(index, new Song("a", "a", "a", 45)); might need it for later use
+		setAll(item);
 	}
 	
 	public void delete(ActionEvent e)
