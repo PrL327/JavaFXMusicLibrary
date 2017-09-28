@@ -372,6 +372,10 @@ public class Controller
 				 selectIndex = index;
 			 observableList.remove(index);
 			 songView.getSelectionModel().select(selectIndex);
+			 if(selectIndex > -1)
+				 setAll(observableList.get(selectIndex));
+			 else
+				 setAll(new Song("","","",""));
 		 }
 	}
 	
