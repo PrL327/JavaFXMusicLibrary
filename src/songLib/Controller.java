@@ -1,9 +1,11 @@
+/*
+ * By Daniel Fraser and Peter Laskai
+ */
 package songLib;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import songUtil.Song;
 import songUtil.SongList;
 
@@ -11,8 +13,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Optional;
-import java.util.Random;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

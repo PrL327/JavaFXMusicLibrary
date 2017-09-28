@@ -1,3 +1,6 @@
+/*
+ * By Daniel Fraser and Peter Laskai
+ */
 package songUtil;
 
 public class Song

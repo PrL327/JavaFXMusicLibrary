@@ -1,3 +1,6 @@
+/*
+ * By Daniel Fraser and Peter Laskai
+ */
 package songLib;
 
 import javafx.application.Application;
