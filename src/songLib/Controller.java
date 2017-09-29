@@ -216,18 +216,15 @@ public class Controller
 				observableList.set(index, newSong);
 				Collections.sort(observableList, songComparer);
 				songView.getSelectionModel().select(observableList.indexOf(new Song(name, artist, album, year)));
-				System.out.println(observableList.indexOf(newSong));
 				mainScreen();
 				
 			}
 			else {
-				System.out.println("error e");
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error ");
 				alert.setHeaderText("There is an error in your input");
 				Optional<ButtonType> result = alert.showAndWait();
 				if(result.get() == ButtonType.OK) {
-					System.out.println("test");
 					setup();
 				}
 			}
@@ -240,17 +237,14 @@ public class Controller
 				observableList.add(newSong);
 				Collections.sort(observableList, songComparer);
 				songView.getSelectionModel().select(observableList.indexOf(newSong));
-				System.out.println("c: " + observableList.indexOf(newSong));
 				mainScreen();
 			}
 			else {
-					System.out.println("error e");
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("Error ");
 					alert.setHeaderText("There is an error in your input");
 					Optional<ButtonType> result = alert.showAndWait();
 					if(result.get() == ButtonType.OK) {
-						System.out.println("test");
 						setup();
 					}
 				}
