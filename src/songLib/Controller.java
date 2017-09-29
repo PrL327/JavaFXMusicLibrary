@@ -209,7 +209,20 @@ public class Controller
 
 		Song newSong = new Song(name, artist, album, year);
 		
-		if(mode == 'e')
+		if(name.isEmpty())
+		{
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error ");
+			alert.setHeaderText("Unable to save, song name is blank");
+		}
+		else if(artist.isEmpty())
+		{
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error ");
+			alert.setHeaderText("Unable to save, artist name is blank");
+		}
+		
+		if(mode == 'e' && !name.isEmpty() && !artist.isEmpty())
 		{
 			if(canAdd(index, newSong))
 			{
@@ -217,12 +230,13 @@ public class Controller
 				Collections.sort(observableList, songComparer);
 				songView.getSelectionModel().select(observableList.indexOf(new Song(name, artist, album, year)));
 				mainScreen();
-				
+				saveList();
 			}
 			else {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error ");
-				alert.setHeaderText("There is an error in your input");
+				alert.setHeaderText("There is already a song with the name and artist combination.\n"
+						+ "Please change one of them in order to edit the song");
 				Optional<ButtonType> result = alert.showAndWait();
 				if(result.get() == ButtonType.OK) {
 					setup();
@@ -230,7 +244,7 @@ public class Controller
 			}
 				
 		}
-		else if(mode == 'c')
+		else if(mode == 'c' && !name.isEmpty() && !artist.isEmpty())
 		{
 			if(canAdd(-1, newSong))
 			{
@@ -238,11 +252,13 @@ public class Controller
 				Collections.sort(observableList, songComparer);
 				songView.getSelectionModel().select(observableList.indexOf(newSong));
 				mainScreen();
+				saveList();
 			}
 			else {
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("Error ");
-					alert.setHeaderText("There is an error in your input");
+					alert.setHeaderText("There is already a song with the name and artist combination.\n"
+							+ "Please change one of them in order to add the song");
 					Optional<ButtonType> result = alert.showAndWait();
 					if(result.get() == ButtonType.OK) {
 						setup();
@@ -304,6 +320,7 @@ public class Controller
 			 else
 				 selectIndex = index;
 			 observableList.remove(index);
+			 saveList();
 			 songView.getSelectionModel().select(selectIndex);
 			 if(selectIndex > -1)
 				 setAll(observableList.get(selectIndex));
