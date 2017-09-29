@@ -216,16 +216,15 @@ public class Controller
 				observableList.set(index, newSong);
 				Collections.sort(observableList, songComparer);
 				songView.getSelectionModel().select(observableList.indexOf(new Song(name, artist, album, year)));
-				System.out.println(observableList.indexOf(newSong));
+				mainScreen();
+				
 			}
 			else {
-				System.out.println("error e");
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error ");
 				alert.setHeaderText("There is an error in your input");
 				Optional<ButtonType> result = alert.showAndWait();
 				if(result.get() == ButtonType.OK) {
-					System.out.println("test");
 					setup();
 				}
 			}
@@ -238,105 +237,39 @@ public class Controller
 				observableList.add(newSong);
 				Collections.sort(observableList, songComparer);
 				songView.getSelectionModel().select(observableList.indexOf(newSong));
-				System.out.println("c: " + observableList.indexOf(newSong));
+				mainScreen();
 			}
 			else {
-					System.out.println("error e");
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("Error ");
 					alert.setHeaderText("There is an error in your input");
 					Optional<ButtonType> result = alert.showAndWait();
 					if(result.get() == ButtonType.OK) {
-						System.out.println("test");
 						setup();
 					}
 				}
 		}
-		//Collections.sort(observableList, songComparer);
-		//songView.getSelectionModel().select(observableList.indexOf(new Song(name, artist, album, year)));
+		
+		Collections.sort(observableList, songComparer);
+		songView.getSelectionModel().select(observableList.indexOf(new Song(name, artist, album, year)));
 
-//		songInput.setVisible(false);
-//		artistInput.setVisible(false);
-//		albumInput.setVisible(false);
-//		yearInput.setVisible(false);
-//		saveButton.setVisible(false);
-//		cancelButton.setVisible(false);
-//
-//		songNameLabel.setVisible(true);
-//		artistLabel.setVisible(true);
-//		albumLabel.setVisible(true);
-//		yearPublishedLabel.setVisible(true);
 	}
 
 	public void addClick(ActionEvent e)
 	{
-		
-//		songInput.setVisible(true);
-//		artistInput.setVisible(true);
-//		albumInput.setVisible(true);
-//		yearInput.setVisible(true);
-//		saveButton.setVisible(true);
-//		cancelButton.setVisible(true);
-//
-//		songInput.setText("");
-//		artistInput.setText("");
-//		albumInput.setText("");
-//		yearInput.setText("");
-//		
-//		songInput.setBackground(new Background(new BackgroundFill(addColor, CornerRadii.EMPTY, Insets.EMPTY)));
-//		artistInput.setBackground(new Background(new BackgroundFill(addColor, CornerRadii.EMPTY, Insets.EMPTY)));
-//		albumInput.setBackground(new Background(new BackgroundFill(addColor, CornerRadii.EMPTY, Insets.EMPTY)));
-//		yearInput.setBackground(new Background(new BackgroundFill(addColor, CornerRadii.EMPTY, Insets.EMPTY)));
-//		
-//		songNameLabel.setVisible(false);
-//		artistLabel.setVisible(false);
-//		albumLabel.setVisible(false);
-//		yearPublishedLabel.setVisible(false);
-
 		mode = 'c'; //tells save to add new song
 		setup();
 	}
 
 	public void editClick(ActionEvent e) 
 	{
-		
-//		songInput.setVisible(true);
-//		artistInput.setVisible(true);
-//		albumInput.setVisible(true);
-//		yearInput.setVisible(true);
-//		saveButton.setVisible(true);
-//		cancelButton.setVisible(true);
-//		
-//		songInput.setBackground(new Background(new BackgroundFill(editColor, CornerRadii.EMPTY, Insets.EMPTY)));
-//		artistInput.setBackground(new Background(new BackgroundFill(editColor, CornerRadii.EMPTY, Insets.EMPTY)));
-//		albumInput.setBackground(new Background(new BackgroundFill(editColor, CornerRadii.EMPTY, Insets.EMPTY)));
-//		yearInput.setBackground(new Background(new BackgroundFill(editColor, CornerRadii.EMPTY, Insets.EMPTY)));
-//
-//		songNameLabel.setVisible(false);
-//		artistLabel.setVisible(false);
-//		albumLabel.setVisible(false);
-//		yearPublishedLabel.setVisible(false);
-
 		mode = 'e'; //tells save to edit a current song
 		setup();
 	}
 
 	public void cancel(ActionEvent e) {
 
-		songInput.setVisible(false);
-		artistInput.setVisible(false);
-		albumInput.setVisible(false);
-		yearInput.setVisible(false);
-		saveButton.setVisible(false);
-		cancelButton.setVisible(false);
-
-		songNameLabel.setVisible(true);
-		artistLabel.setVisible(true);
-		albumLabel.setVisible(true);
-		yearPublishedLabel.setVisible(true);
-		addSong.setVisible(true);
-		editSong.setVisible(true);
-		deleteSong.setVisible(true);
+		mainScreen();
 
 		//get item selected
 		Song item = songView.getSelectionModel().getSelectedItem();
@@ -379,7 +312,7 @@ public class Controller
 		 }
 	}
 	
-public void setup () {
+	public void setup () {
 		
 		songNameLabel.setVisible(false);
 		artistLabel.setVisible(false);
@@ -415,6 +348,24 @@ public void setup () {
 			yearInput.setBackground(new Background(new BackgroundFill(addColor, CornerRadii.EMPTY, Insets.EMPTY)));
 		}
 	}
+	public void mainScreen() {
+	
+		songInput.setVisible(false);
+		artistInput.setVisible(false);
+		albumInput.setVisible(false);
+		yearInput.setVisible(false);
+		saveButton.setVisible(false);
+		cancelButton.setVisible(false);
+		
+		songNameLabel.setVisible(true);
+		artistLabel.setVisible(true);
+		albumLabel.setVisible(false);
+		yearPublishedLabel.setVisible(true);
+		addSong.setVisible(true);
+		editSong.setVisible(true);
+		deleteSong.setVisible(true);
+	
+}
 	
 	public void saveList()
 	{
