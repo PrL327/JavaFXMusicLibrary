@@ -1,0 +1,10 @@
+/*
+ * By Daniel Fraser and Peter Laskai
+ */
+ /*
+  * does nothing but changes font
+  */
+.list-cell 
+{
+    -fx-font-family: "monospace";
+}
