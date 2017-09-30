@@ -15,12 +15,15 @@ import java.util.stream.Collectors;
 
 public class SongFile 
 {
+	/**
+	 * writes array of Song objects to the text file
+	 * @param songList
+	 */
 	public static void writeFile(ArrayList<Song> songList)
 	{
 		try {
 			Files.write(Paths.get("songFile.txt"), "".getBytes());
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		for(Song s : songList)
@@ -33,12 +36,14 @@ public class SongFile
 			try {
 				Files.write(Paths.get("songFile.txt"), newEntry.getBytes(), StandardOpenOption.APPEND);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
 	
+	/**
+	 * reads in from text file and converts it to arraylist of Song objects
+	 */
 	public static ArrayList<Song> readFile()
 	{
 		String fileName = "songFile.txt";
@@ -59,22 +64,13 @@ public class SongFile
 		for(int i = 0; i < list.size(); i += 5)
 		{
 			songInfo = list.get(i) + list.get(i+1) + list.get(i+2) + list.get(i+3);
-			//songInfo = "Song Name: a";
-			//System.out.println(songInfo);
 			r = Pattern.compile(pattern);
 			m = r.matcher(songInfo);
 			
 			if (m.find())
 			{
-				//System.out.println(m.group(0));
-				//System.out.println(m.group(1));
-				//System.out.println(m.group(2));
-				//System.out.println(m.group(3));
-				//System.out.println(m.group(4));
 				songList.add(new Song(m.group(1),m.group(2),m.group(3),m.group(4)));
 			}
-			
-			//songList.add(new Song(m.group(1),,,)
 		}
 		return songList;
 	}

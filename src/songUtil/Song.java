@@ -9,6 +9,8 @@ public class Song
 	
 	//name, artist, album, and year
 	/**
+	 * constructor for a new song object
+	 * 
 	 * @param newName
 	 * @param newArtist
 	 * @param newAlbum
@@ -21,8 +23,8 @@ public class Song
 		artist = newArtist;
 		album = newAlbum;
 	}
-	/**
-	 * @return
+	/*
+	 *  setters and getters
 	 */
 	public String getName() {
 		return name;
@@ -65,6 +67,9 @@ public class Song
 		}
 	}
 	
+	/**
+	 * toString method for a Song object
+	 */
 	@Override
 	public String toString() {
 		return "Song name: " + this.name +
