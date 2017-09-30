@@ -40,6 +40,8 @@ public class Controller
 	Color addColor = Color.LIGHTGREEN;
 	Color editColor = Color.LIGHTYELLOW;
 	
+	boolean editing = false;
+	
 	@FXML
 	ListView<Song> songView;
 
@@ -166,10 +168,14 @@ public class Controller
 	private void showSongInfo(Stage mainStage) 
 	{  
 		//get item selected
-		Song item = songView.getSelectionModel().getSelectedItem();
+		if(!editing)
+		{
+			Song item = songView.getSelectionModel().getSelectedItem();
 
-		//observableList.set(index, new Song("a", "a", "a", 45)); might need it for later use
-		setAll(item);
+			//observableList.set(index, new Song("a", "a", "a", 45)); might need it for later use
+			setAll(item);
+		}
+		
 	}
 
 	private boolean canAdd(int index, Song newSong)
@@ -211,17 +217,23 @@ public class Controller
 		//System.out.println("|"+name+'|'+name.isEmpty());
 		if(name.isEmpty())
 		{
+			editing = true;
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error");
 			alert.setHeaderText("Unable to save, song name is blank");
 			Optional<ButtonType> result = alert.showAndWait();
+			songInput.setText("");
+			//mainScreen();
 		}
 		else if(artist.isEmpty())
 		{
+			editing = true;
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error ");
 			alert.setHeaderText("Unable to save, artist name is blank");
 			Optional<ButtonType> result = alert.showAndWait();
+			artistInput.setText("");
+			//mainScreen();
 		}
 		
 		if(mode == 'e' && !name.isEmpty() && !artist.isEmpty())
@@ -233,6 +245,7 @@ public class Controller
 				songView.getSelectionModel().select(observableList.indexOf(new Song(name, artist, album, year)));
 				mainScreen();
 				saveList();
+				editing = false;
 			}
 			else {
 				Alert alert = new Alert(AlertType.ERROR);
@@ -243,6 +256,7 @@ public class Controller
 				if(result.get() == ButtonType.OK) {
 					setup();
 				}
+				editing = false;
 			}
 				
 		}
@@ -255,6 +269,7 @@ public class Controller
 				songView.getSelectionModel().select(observableList.indexOf(newSong));
 				mainScreen();
 				saveList();
+				editing = false;
 			}
 			else {
 					Alert alert = new Alert(AlertType.ERROR);
@@ -265,6 +280,7 @@ public class Controller
 					if(result.get() == ButtonType.OK) {
 						setup();
 					}
+					editing = false;
 				}
 		}
 		

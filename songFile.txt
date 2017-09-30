@@ -1,3 +1,8 @@
+Song Name: a 
+Artist: aaaa 
+Album:  
+Year:  
+---------------------------------- 
 Song Name: aaa 
 Artist: aaa 
 Album:  
@@ -10,6 +15,11 @@ Year:
 ---------------------------------- 
 Song Name: asasd 
 Artist: asads 
+Album:  
+Year:  
+---------------------------------- 
+Song Name: b 
+Artist: aaaa 
 Album:  
 Year:  
 ---------------------------------- 
