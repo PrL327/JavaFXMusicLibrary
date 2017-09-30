@@ -229,7 +229,7 @@ public class Controller
 		String artist = artistInput.getText();
 		String album = albumInput.getText();
 		String year = yearInput.getText();
-
+		
 		Comparator<Song> songComparer = Comparator.comparing(Song::getName, String.CASE_INSENSITIVE_ORDER)
 				.thenComparing(Song::getArtist, String.CASE_INSENSITIVE_ORDER);
 
@@ -247,7 +247,7 @@ public class Controller
 		}
 		else if(artist.isEmpty()) //Error pop ups if user leaves artists fields blank
 		{
-			editing = true;
+			editing = true;  // resets bool val
 			Alert alert = new Alert(AlertType.ERROR); //ERROR alert type
 			alert.setTitle("Error ");
 			alert.setHeaderText("Unable to save, artist name is blank");
@@ -260,20 +260,23 @@ public class Controller
 			if(canAdd(index, newSong)) // if it passes all paramemeter reqs
 			{
 				observableList.set(index, newSong); //updates songlist and view and changes placement if necessary
+				editing = false; // resets bool val
 				Collections.sort(observableList, songComparer);
-				songView.getSelectionModel().select(observableList.indexOf(new Song(name, artist, album, year))); //autoselects updated song 
+				songView.getSelectionModel().select(observableList.indexOf(newSong)); //autoselects updated song 
 				mainScreen(); // returns to main initial screen
 				saveList(); //saves it to txt file
-				editing = false;
+				
+				
 			}
 			else {
+				editing = false;  // resets bool val
 				Alert alert = new Alert(AlertType.ERROR); //DUPLICATE ERROR pops up if fields are the same
 				alert.setTitle("Error ");
 				alert.setHeaderText("There is already a song with the name and artist combination.\n"
 						+ "Please change one of them in order to edit the song");
 				Optional<ButtonType> result = alert.showAndWait();
 				setup(); //shows fields again
-				editing = false;
+				
 			}
 
 		}
@@ -281,21 +284,21 @@ public class Controller
 		{
 			if(canAdd(-1, newSong))
 			{
+				editing = false;  // resets bool val
 				observableList.add(newSong); //adds new song to list
 				Collections.sort(observableList, songComparer); //sorts again with new song added to list
 				songView.getSelectionModel().select(observableList.indexOf(newSong)); //selects new song
 				mainScreen(); // resets to main screen
 				saveList(); //saves new list to txt file
-				editing = false; // resets bool val
 			}
 			else {
+				editing = false;  // resets bool val
 				Alert alert = new Alert(AlertType.ERROR); //DUPLICATE ERROR
 				alert.setTitle("Error ");
 				alert.setHeaderText("There is already a song with the name and artist combination.\n"
 						+ "Please change one of them in order to add the song");
 				Optional<ButtonType> result = alert.showAndWait();
 				setup(); //shows fields again
-				editing = false;
 			}
 		}
 
@@ -431,7 +434,7 @@ public class Controller
 		//sets labels and buttons to view
 		songNameLabel.setVisible(true);
 		artistLabel.setVisible(true);
-		albumLabel.setVisible(false);
+		albumLabel.setVisible(true);
 		yearPublishedLabel.setVisible(true);
 		addSong.setVisible(true);
 		editSong.setVisible(true);
