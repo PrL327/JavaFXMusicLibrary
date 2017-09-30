@@ -208,18 +208,20 @@ public class Controller
 				.thenComparing(Song::getArtist, String.CASE_INSENSITIVE_ORDER);
 
 		Song newSong = new Song(name, artist, album, year);
-		
+		//System.out.println("|"+name+'|'+name.isEmpty());
 		if(name.isEmpty())
 		{
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error ");
+			alert.setTitle("Error");
 			alert.setHeaderText("Unable to save, song name is blank");
+			Optional<ButtonType> result = alert.showAndWait();
 		}
 		else if(artist.isEmpty())
 		{
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error ");
 			alert.setHeaderText("Unable to save, artist name is blank");
+			Optional<ButtonType> result = alert.showAndWait();
 		}
 		
 		if(mode == 'e' && !name.isEmpty() && !artist.isEmpty())
@@ -267,7 +269,7 @@ public class Controller
 		}
 		
 		Collections.sort(observableList, songComparer);
-		songView.getSelectionModel().select(observableList.indexOf(new Song(name, artist, album, year)));
+		//songView.getSelectionModel().select(observableList.indexOf(new Song(name, artist, album, year)));
 
 	}
 
