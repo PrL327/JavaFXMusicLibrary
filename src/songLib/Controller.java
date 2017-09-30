@@ -94,7 +94,7 @@ public class Controller
 		addSong.setBackground(new Background(new BackgroundFill(addColor, CornerRadii.EMPTY, Insets.EMPTY)));
 		deleteSong.setBackground(new Background(new BackgroundFill(deleteColor, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		helpLabel.setText(String.format("  %-25s%s", "Song name", "Artist"));
+		helpLabel.setText(String.format("  %-25s\n  %s", "Song name", "Artist"));
 		helpLabel.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		songInput.setVisible(false);
@@ -120,7 +120,7 @@ public class Controller
 				if (empty || item == null) {
 					setText(null);
 				} else {
-					setText(String.format("%-15s%s", item.getName(), item.getArtist()));
+					setText(String.format("%s\n%s", item.getName(), item.getArtist()));
 				}
 			}
 		});
