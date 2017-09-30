@@ -35,13 +35,13 @@ public class Controller
 	//c = creating a new song
 	//n = nothing
 	//d = deletion mode
-	char mode = 'n';
+	char mode = 'n'; //mode is a global variable used to indicate whether the user is editing or adding a song
 	Color deleteColor = Color.SALMON;
 	Color addColor = Color.LIGHTGREEN;
 	Color editColor = Color.LIGHTYELLOW;
 	
-	boolean editing = false;
-	
+	boolean editing = false; //edit status for controller indication
+	// FXML DEFINITIONS FOR CONTROLLER
 	@FXML
 	ListView<Song> songView;
 
@@ -90,7 +90,7 @@ public class Controller
 	@FXML
 	Label helpLabel;
 	
-	public void start(Stage mainStage) {
+	public void start(Stage mainStage) { // Initialization of FXapp
 		
 		editSong.setBackground(new Background(new BackgroundFill(editColor, CornerRadii.EMPTY, Insets.EMPTY)));
 		addSong.setBackground(new Background(new BackgroundFill(addColor, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -99,7 +99,8 @@ public class Controller
 		helpLabel.setText(String.format("  %-25s\n  %s", "Song name", "Artist"));
 		helpLabel.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		songInput.setVisible(false);
+		//Inputs initally not visible, not until user interacts with either add/eddit
+		songInput.setVisible(false); 
 		artistInput.setVisible(false);
 		albumInput.setVisible(false);
 		yearInput.setVisible(false);
@@ -111,7 +112,7 @@ public class Controller
 
 		observableList = FXCollections.observableArrayList(SongList.getList());
 
-		songView.setItems(observableList);
+		songView.setItems(observableList); //populates listview with Songs form txt file
 		//songView.set
 		//songView.setf
 		songView.setCellFactory(param -> new ListCell<Song>() {
@@ -149,11 +150,13 @@ public class Controller
 	{
 		if(song != null)
 		{
+			//Input fields filled in with song data if user is Editing currently selected song
 			songInput.setText(song.getName());
 			artistInput.setText(song.getArtist());
 			albumInput.setText(song.getAlbum());
 			yearInput.setText(song.getYear());
 
+			//Labels are filled with song data and dynamically change as user selects other songs in listview
 			songNameLabel.setText(song.getName());
 			artistLabel.setText(song.getArtist());
 			albumLabel.setText(song.getAlbum());
@@ -177,7 +180,10 @@ public class Controller
 		}
 		
 	}
-
+	/*
+	 * sets a boolean to true or false if requirements are meet
+	 * @param index, newSong
+	 */
 	private boolean canAdd(int index, Song newSong)
 	{
 		Song s;
@@ -199,13 +205,18 @@ public class Controller
 		return canAdd;
 	}
 	
+	/*
+	 * Event handler for save button
+	 * @param ActionEvent e
+	 */
 	public void save(ActionEvent e) 
 	{
 		//get selected item
 		//Song item = songView.getSelectionModel().getSelectedItem();
 		int index = songView.getSelectionModel().getSelectedIndex();
 
-		String name = songInput.getText();
+		//Extrapolates user input from fields to create a new <Song>
+		String name = songInput.getText(); 
 		String artist = artistInput.getText();
 		String album = albumInput.getText();
 		String year = yearInput.getText();
@@ -213,8 +224,9 @@ public class Controller
 		Comparator<Song> songComparer = Comparator.comparing(Song::getName, String.CASE_INSENSITIVE_ORDER)
 				.thenComparing(Song::getArtist, String.CASE_INSENSITIVE_ORDER);
 
-		Song newSong = new Song(name, artist, album, year);
-		//System.out.println("|"+name+'|'+name.isEmpty());
+		Song newSong = new Song(name, artist, album, year); //New Song created and initialized with user vals
+	
+		//If user leaves name field blank asserts a error popup indicating such
 		if(name.isEmpty())
 		{
 			editing = true;
@@ -225,85 +237,97 @@ public class Controller
 			songInput.setText("");
 			//mainScreen();
 		}
-		else if(artist.isEmpty())
+		else if(artist.isEmpty()) //Error pop ups if user leaves artists fields blank
 		{
 			editing = true;
-			Alert alert = new Alert(AlertType.ERROR);
+			Alert alert = new Alert(AlertType.ERROR); //ERROR alert type
 			alert.setTitle("Error ");
 			alert.setHeaderText("Unable to save, artist name is blank");
 			Optional<ButtonType> result = alert.showAndWait();
-			artistInput.setText("");
+			artistInput.setText("");//Resets back to blank
 			//mainScreen();
 		}
 		
-		if(mode == 'e' && !name.isEmpty() && !artist.isEmpty())
+		if(mode == 'e' && !name.isEmpty() && !artist.isEmpty()) //user is in edit mode and all required fields are filled im
 		{
-			if(canAdd(index, newSong))
+			if(canAdd(index, newSong)) // if it passes all paramemeter reqs
 			{
-				observableList.set(index, newSong);
+				observableList.set(index, newSong); //updates songlist and view and changes placement if necessary
 				Collections.sort(observableList, songComparer);
-				songView.getSelectionModel().select(observableList.indexOf(new Song(name, artist, album, year)));
-				mainScreen();
-				saveList();
+				songView.getSelectionModel().select(observableList.indexOf(new Song(name, artist, album, year))); //autoselects updated song 
+				mainScreen(); // returns to main initial screen
+				saveList(); //saves it to txt file
 				editing = false;
 			}
 			else {
-				Alert alert = new Alert(AlertType.ERROR);
+				Alert alert = new Alert(AlertType.ERROR); //DUPLICATE ERROR pops up if fields are the same
 				alert.setTitle("Error ");
 				alert.setHeaderText("There is already a song with the name and artist combination.\n"
 						+ "Please change one of them in order to edit the song");
 				Optional<ButtonType> result = alert.showAndWait();
 				if(result.get() == ButtonType.OK) {
-					setup();
+					setup(); //shows fields again
 				}
 				editing = false;
 			}
 				
 		}
-		else if(mode == 'c' && !name.isEmpty() && !artist.isEmpty())
+		else if(mode == 'c' && !name.isEmpty() && !artist.isEmpty()) //user is in add mode and fields are filled in
 		{
 			if(canAdd(-1, newSong))
 			{
-				observableList.add(newSong);
-				Collections.sort(observableList, songComparer);
-				songView.getSelectionModel().select(observableList.indexOf(newSong));
-				mainScreen();
-				saveList();
-				editing = false;
+				observableList.add(newSong); //adds new song to list
+				Collections.sort(observableList, songComparer); //sorts again with new song added to list
+				songView.getSelectionModel().select(observableList.indexOf(newSong)); //selects new song
+				mainScreen(); // resets to main screen
+				saveList(); //saves new list to txt file
+				editing = false; // resets bool val
 			}
 			else {
-					Alert alert = new Alert(AlertType.ERROR);
+					Alert alert = new Alert(AlertType.ERROR); //DUPLICATE ERROR
 					alert.setTitle("Error ");
 					alert.setHeaderText("There is already a song with the name and artist combination.\n"
 							+ "Please change one of them in order to add the song");
 					Optional<ButtonType> result = alert.showAndWait();
 					if(result.get() == ButtonType.OK) {
-						setup();
+						setup(); //shows fields again
 					}
 					editing = false;
 				}
 		}
 		
-		Collections.sort(observableList, songComparer);
+		Collections.sort(observableList, songComparer); //sorts list
 		//songView.getSelectionModel().select(observableList.indexOf(new Song(name, artist, album, year)));
 
 	}
-
-	public void addClick(ActionEvent e)
+	
+	/*
+	 * Event handler for add Button
+	 * @param ActionEvent e
+	 */
+	public void addClick(ActionEvent e) 
 	{
 		mode = 'c'; //tells save to add new song
-		setup();
+		setup(); //calls setup method
 	}
 
+	/*
+	 * Event handler for edit button
+	 * @param ActionEvent e
+	 */
 	public void editClick(ActionEvent e) 
 	{
 		mode = 'e'; //tells save to edit a current song
-		setup();
+		setup(); //calls setup method
 	}
 
-	public void cancel(ActionEvent e) {
+	/*
+	 * Event handler for cancel button
+	 * @param ActionEvent e
+	 */
+	public void cancel(ActionEvent e) { 
 
-		mainScreen();
+		mainScreen(); //calls mainscreen method
 
 		//get item selected
 		Song item = songView.getSelectionModel().getSelectedItem();
@@ -312,14 +336,18 @@ public class Controller
 		setAll(item);
 	}
 	
-	public void delete(ActionEvent e)
+	/*
+	 * Event handler for delete button
+	 * @param ActionEvent e
+	 */
+	public void delete(ActionEvent e) 
 	{
-		Alert alert = new Alert(AlertType.CONFIRMATION);
+		Alert alert = new Alert(AlertType.CONFIRMATION); //Confirmation pop up
 		   alert.setTitle("Confirm Dialog");
 		   alert.setHeaderText("Are you sure you want to delete this song?");
 		   
 		 Optional<ButtonType> result = alert.showAndWait();
-		 if (result.get() == ButtonType.OK)
+		 if (result.get() == ButtonType.OK) //if user says ok
 		 {
 			 int index = songView.getSelectionModel().getSelectedIndex();
 			 int selectIndex = 0;
@@ -346,9 +374,12 @@ public class Controller
 				 setAll(new Song("","","",""));
 		 }
 	}
-	
-	public void setup () {
-		
+	/*
+	 * setup is a method that sets up the UI display according to the users interaction with
+	 * add/edit but
+	 */
+	public void setup () { 
+		//All initial labels and buttons are set to invisible
 		songNameLabel.setVisible(false);
 		artistLabel.setVisible(false);
 		albumLabel.setVisible(false);
@@ -357,6 +388,7 @@ public class Controller
 		editSong.setVisible(false);
 		deleteSong.setVisible(false);
 		
+		//makes input and save/cancel buttons visible
 		songInput.setVisible(true);
 		artistInput.setVisible(true);
 		albumInput.setVisible(true);
@@ -365,7 +397,7 @@ public class Controller
 		cancelButton.setVisible(true);
 		
 
-		if(mode == 'e') {	
+		if(mode == 'e') {	//sets colors according to users current mode
 			songInput.setBackground(new Background(new BackgroundFill(editColor, CornerRadii.EMPTY, Insets.EMPTY)));
 			artistInput.setBackground(new Background(new BackgroundFill(editColor, CornerRadii.EMPTY, Insets.EMPTY)));
 			albumInput.setBackground(new Background(new BackgroundFill(editColor, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -383,8 +415,12 @@ public class Controller
 			yearInput.setBackground(new Background(new BackgroundFill(addColor, CornerRadii.EMPTY, Insets.EMPTY)));
 		}
 	}
+	/*
+	 * mainScreen sets up user to the intial screen if user cancels or saves successfully
+	 */
 	public void mainScreen() {
 	
+		//removes input and buttons from view
 		songInput.setVisible(false);
 		artistInput.setVisible(false);
 		albumInput.setVisible(false);
@@ -392,6 +428,7 @@ public class Controller
 		saveButton.setVisible(false);
 		cancelButton.setVisible(false);
 		
+		//sets labels and buttons to view
 		songNameLabel.setVisible(true);
 		artistLabel.setVisible(true);
 		albumLabel.setVisible(false);
@@ -401,7 +438,9 @@ public class Controller
 		deleteSong.setVisible(true);
 	
 }
-	
+	/*
+	 * saves song to txt file
+	 */
 	public void saveList()
 	{
 		SongList.setList(new ArrayList<>(observableList));
