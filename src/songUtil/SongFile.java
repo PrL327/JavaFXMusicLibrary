@@ -46,6 +46,7 @@ public class SongFile
 	 */
 	public static ArrayList<Song> readFile()
 	{
+		boolean noFile = false;
 		String fileName = "songFile.txt";
 		ArrayList<String> list = new ArrayList<>();
 		ArrayList<Song> songList = new ArrayList<>();
@@ -55,8 +56,11 @@ public class SongFile
 			list = (ArrayList<String>) br.lines().collect(Collectors.toList());
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			noFile = true;
 		}
+		if(noFile)//if file doesn't exist, return an empty list
+			return new ArrayList<Song>();
+		
 		String songInfo = "";
 		Pattern r;
 		Matcher m;
